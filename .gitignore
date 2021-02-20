@@ -14,3 +14,9 @@ frontend/node_modules
 /coverage
 /.nyc_output
 
+
+backend/package-lock.json
+
+backend/yarn-error.log
+
+backend/yarn.lock
