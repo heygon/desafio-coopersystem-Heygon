@@ -3,8 +3,8 @@ backend/dist
 backend/node_modules
 
 # Frontend
-frontend/dist
-frontend/node_modules
+web/dist
+web/node_modules
 
 
 # OS

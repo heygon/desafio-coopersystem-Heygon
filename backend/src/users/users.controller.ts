@@ -10,6 +10,12 @@ import { UsersService } from './users.service';
 export class UsersController {
     constructor(private readonly usersService: UsersService){}
 
+    // Busca registro pelo id
+    @Get(':id')
+    async login(@Body() {Login , Senha} : any): Promise<UserEntity>{
+        return await this.usersService.login({ Login, Senha });
+    }
+    
     // Lista todos os registros
     @Get()
     async index(): Promise<UserEntity[]>{
