@@ -17,3 +17,42 @@ export class UserDto {
     perfil : number;
     
 }
+
+export class LoginDto {
+    @ApiProperty({
+        description : "Esse campo aceita o E-mail ou o CPF",
+        type: String
+    })
+    Login   : string;
+
+    @ApiProperty({
+        type: String
+    })
+    Senha  : string;
+    
+}
+
+export class IdDto {
+    @ApiProperty()
+    id : number;
+
+}
+
+
+export class AtualizaDto {
+    @ApiProperty()
+    nome   : string;
+
+    @ApiProperty()
+    email  : string;
+
+    @ApiProperty()
+    cpf    : string;
+
+    @ApiProperty()
+    senha  : string;
+
+    @ApiProperty()
+    perfil : number;
+    
+}
