@@ -11,6 +11,19 @@ export class UsersService {
         private userRepository : Repository<UserEntity>
     ){}
 
+    // Busca usuário para fazer o login
+    async login( Dados : any ): Promise<UserEntity[]>{
+        console.log('Tentando printar o Login');
+        console.log(Dados);
+        const user = await this.userRepository.find({
+            where: [
+                { email: Dados.login, senha: Dados.senha, perfil: 2 },
+                { cpf: Dados.login, senha: Dados.senha, perfil: 2 }
+              ]
+        });
+        return user;
+    }
+
     // Lista todos os usuários do sistema
     async findAll(): Promise<UserEntity[]>{
         return await this.userRepository.find();
