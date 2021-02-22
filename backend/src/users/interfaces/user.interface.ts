@@ -3,6 +3,7 @@ export interface User{
     email  : string,
     cpf    : string,
     senha  : string,
+    token  : string,
     perfil : number,
 
 }

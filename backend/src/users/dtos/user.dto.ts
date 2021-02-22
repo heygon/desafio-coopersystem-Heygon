@@ -15,7 +15,6 @@ export class UserDto {
 
     @ApiProperty()
     perfil : number;
-    
 }
 
 export class LoginDto {
@@ -29,15 +28,17 @@ export class LoginDto {
         type: String
     })
     Senha  : string;
-    
+}
+
+export class RecuperarSenhaDto {
+    @ApiProperty()
+    email : string;
 }
 
 export class IdDto {
     @ApiProperty()
     id : number;
-
 }
-
 
 export class AtualizaDto {
     @ApiProperty()
@@ -54,5 +55,24 @@ export class AtualizaDto {
 
     @ApiProperty()
     perfil : number;
-    
+}
+
+export class NovaSenhaDto {
+    @ApiProperty()
+    email   : string;
+
+    @ApiProperty()
+    novotoken  : string;
+
+    @ApiProperty()
+    novasenha    : string;
+}
+
+export class alterarPerfilDto {
+    @ApiProperty()
+    id   : string;
+
+    @ApiProperty()
+    userid  : string;
+
 }

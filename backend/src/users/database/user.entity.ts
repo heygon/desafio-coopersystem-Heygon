@@ -20,6 +20,9 @@ export class UserEntity{
     @Column()
     perfil: number;
 
+    @Column({ default: null })
+    token: string;
+
     @CreateDateColumn({ name: 'created_At' })
     createdAt: Date;
 

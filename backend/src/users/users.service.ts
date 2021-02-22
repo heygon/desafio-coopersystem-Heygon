@@ -13,8 +13,6 @@ export class UsersService {
 
     // Busca usuário para fazer o login
     async login( Dados : any ): Promise<UserEntity[]>{
-        console.log('Tentando printar o Login');
-        console.log(Dados);
         const user = await this.userRepository.find({
             where: [
                 { email: Dados.login, senha: Dados.senha, perfil: 2 },
@@ -30,7 +28,7 @@ export class UsersService {
     }
 
     // Cria e retorna os dados criados
-    async create(user: User): Promise<UserEntity>{
+    async create(user: any): Promise<UserEntity[]>{
         return await this.userRepository.save(user);
     }
 
@@ -56,6 +54,64 @@ export class UsersService {
         user.senha = senha ? senha : user.senha;
 
         await this.userRepository.save(user);
+    }
+
+    // Gera um token para recuperar senha
+    async recuperarSenha( Dados : any ){
+                
+        const user = await this.userRepository.find({ email : Dados.email });
+        console.log(user);
+
+        if(user[0].email != ''){
+            let token = new Date().getTime().toString();
+            user[0].token = token;
+
+            await this.userRepository.save(user);
+
+            return { token };
+        }else{
+            return { "resposta":"Usuário não existe" };
+        }
+    }
+
+    // Grava nova senha
+    async novaSenha( Dados : any ){
+        const user = await this.userRepository.find({ token : Dados.novotoken });
+        console.log(user);
+        if(user[0].email != ''){
+            user[0].token = '';
+            user[0].senha = Dados.novasenha;
+
+            await this.userRepository.save(user);
+
+            return { resp : 's', "msg":"Senha alterado com sucesso!" };            
+        }else{
+            return { resp : 's', "msg":"Usuário não existe" };
+        }
+
+    }
+
+    // Grava nova senha
+    async alterarPerfil( Dados : any ){
+        const user = await this.userRepository.find({ id : Dados.id });
+        if(user[0].perfil == 2){
+            const us = await this.userRepository.find({ id : Dados.userid });
+            let per = 0;
+            if(us[0].perfil == 1){
+                us[0].perfil = 2;
+                per = 2;
+            }else if(us[0].perfil == 2){
+                us[0].perfil = 1;
+                per = 1;
+            }
+
+            await this.userRepository.save(us);
+            return { resp : 's', "msg":"Senha alterado com sucesso!", per };            
+
+        }else{
+            return { resp : 's', "msg":"Usuário não existe" };
+        }
+
     }
 }
 
