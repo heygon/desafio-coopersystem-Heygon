@@ -94,7 +94,7 @@ export class UsersService {
     // Grava nova senha
     async alterarPerfil( Dados : any ){
         const user = await this.userRepository.find({ id : Dados.id });
-        if(user[0].perfil == 2){
+        if(user.length >= 1 && user[0].perfil == 2){
             const us = await this.userRepository.find({ id : Dados.userid });
             let per = 0;
             if(us[0].perfil == 1){
@@ -109,7 +109,7 @@ export class UsersService {
             return { resp : 's', "msg":"Senha alterado com sucesso!", per };            
 
         }else{
-            return { resp : 's', "msg":"Usuário não existe" };
+            return { resp : 's', "msg":"Você não tem permissão para acessar essa rota" };
         }
 
     }

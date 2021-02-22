@@ -24,6 +24,7 @@ function Login() {
         }).then((e) => {
             console.log(e);
             if(e.data.length >= 1){
+                localStorage.setItem('DadosCoopersystem',JSON.stringify(e.data[0]));
                 history.push("/home");
             }else{
                 alert('Usuário não encontrado');
