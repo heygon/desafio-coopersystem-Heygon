@@ -1,5 +1,6 @@
 version : "3"
 services : 
+  
   postgres:
     image : "postgres:alpine"
     container_name: postgres
@@ -9,25 +10,25 @@ services :
       POSTGRES_PASSWORD : 1234
       POSTGRES_DB : cooper
 
-  backend:
-    build: "./backend"
-    container_name: backend
-    volumes: 
-      - ./backend:/home/node/app
-    ports:
-      - "3002:3000"
-    network_mode: bridge
-    depends_on:
-      - postgres
-
   frontend : 
-    image : "nginx:alpine"
+    image : "node:alpine"
     container_name: frontend
     volumes:
-      - ./frontend:/usr/share/nginx/html
+      - ./frontend:/frontend
     ports:
-      - "3001:80"
-    depends_on:
-      - postgres
-      - backend
+      - "3001:3000"
+    command:
+      - cd frontend
+      - npm install
+      - npm start
     
+  backend:
+    image: node:alpine
+    container_name: backend
+    working_dir: /backend
+    volumes: 
+      - ./backend:/backend
+    ports:
+      - "3002:3000"
+    command: "npm install"  
+  

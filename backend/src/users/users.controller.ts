@@ -105,8 +105,15 @@ export class UsersController {
         description : 'Rota responsável por alterar o peril do usuário',
         type: alterarPerfilDto 
     })
-    async alterarPerfil(  @Body() Dados: any ){
+    async alterarPerfil( @Body() Dados: any ){
         return await this.usersService.alterarPerfil(Dados);
+    }
+    
+    // Alterar Perfil do usuário
+    @Get('seed')
+    async seed(){
+        console.log('Passando aqui');
+        //return await this.usersService.seed(Dados);
     }
 }
 

@@ -113,6 +113,39 @@ export class UsersService {
         }
 
     }
+
+    // Grava nova senha
+    async seed( Dados : any ){
+        console.log('Iniciando o seed do banco');
+        console.log('Inserindo 2 usuários um administrador e 1 cliente');
+        const novoUsuarios = [
+            {
+                nome   : "Admin",
+                email  : "admin@email.com",
+                cpf    : "000.000.000-00",
+                senha  : "1234",
+                perfil : 2
+            },
+            {
+                nome   : "Cliente",
+                email  : "cliente@email.com",
+                cpf    : "000.000.000-00",
+                senha  : "1234",
+                perfil : 1
+            }
+        ]
+        try {
+            for (let u = 0; u < novoUsuarios.length; u++) {
+                return await this.userRepository.save(novoUsuarios[u]);
+            }
+            console.log('Seed concluido');
+        } catch (error) {
+            console.log('Seed com erro');
+        }
+
+        return true;
+
+    }
 }
 
 

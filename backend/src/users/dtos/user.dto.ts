@@ -14,6 +14,9 @@ export class UserDto {
     senha  : string;
 
     @ApiProperty()
+    token  : string;
+
+    @ApiProperty()
     perfil : number;
 }
 
